@@ -71,6 +71,30 @@ function getCityInfo(city) {
 
 }
 
+function fiveDay(){
+    var queryforcastURL="https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey; 
+    $.ajax({
+        url:queryforcastURL,
+        method:"GET"
+    }).then(function(response){
+        
+        for (i=0;i<5;i++){
+            var date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
+            var iconcode= response.list[((i+1)*8)-1].weather[0].icon;
+            var iconurl="https://openweathermap.org/img/wn/"+iconcode+".png";
+            var tempF= response.list[((i+1)*8)-1].main.temp;
+            var tempFahrenheit=(((tempF-273.5)*1.80)+32).toFixed(2);
+            var humidity= response.list[((i+1)*8)-1].main.humidity;
+        
+            $("#card-date"+i).html(date);
+            $("#card-img"+i).html("<img src="+iconurl+">");
+            $("#card-temp"+i).html(tempFahrenheit+"&#8457");
+            $("#card-hum"+i).html(humidity+"%");
+        }
+        
+    });
+}
+
 
 
 
