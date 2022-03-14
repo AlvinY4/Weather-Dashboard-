@@ -24,4 +24,5 @@ For this project I created a weather dashboard using the Open Weather API. It al
 
 ## Deployed Link 
 
+https://alviny4.github.io/Weather-Dashboard-/ 
 
