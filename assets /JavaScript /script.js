@@ -12,7 +12,7 @@ var searchCity = []
  
 function find(cities){
     for (var i=0; i<searchCity.length; i++){
-        if(cities.toUpperCase()===searchCity[i]){
+        if(cities===searchCity[i]){
             return -1;
         }
     }
@@ -55,12 +55,13 @@ function getCityInfo(city) {
         var speedMph = (windSpeed*2.237).toFixed(1); 
         $(currentWind).html(speedMph+"MPH");
 
+
         if(response.cod==200){
             searchCity = JSON.parse(localStorage.getItem("cityname"));
             console.log(searchCity); 
             if (searchCity==null){
                 searchCity=[];
-                searchCity.push(city.toUpperCase());
+                searchCity.push(city);
                 localStorage.setItem("cityname",JSON.stringify(searchCity));
                 searchedCities(city);
             } 
@@ -96,6 +97,50 @@ function fiveDay(){
 }
 
 
+function searchedCities(cities){
+    var listCity= $("<ul>"+cities+"</ul>");
+    $(listCity).attr("class",".list-cities");
+    $(listCity).attr("data-value",cities);
+    $(".list-cities").append(listCity);
+}
+
+
+
+function PastSearch(event){
+    var liEl=event.target;
+    if (event.target.matches("ul")){
+        city=liEl.textContent.trim();
+        getCityInfo(city);
+    }
+
+}
+
+function loadlastCity(){
+    $(".list-cities").empty();
+    var searchCity = JSON.parse(localStorage.getItem("cityname"));
+    if(searchCity!==null){
+        searchC=JSON.parse(localStorage.getItem("cityname"));
+        for(i=0; i<searchC.length;i++){
+            searchedCities(searchCity[i]);
+        }
+        city=searchCity[i-1];
+        getCityInfo(city);
+    }
+}
+
+function clearHistory(event){
+    event.preventDefault();
+    searchCity=[];
+    localStorage.removeItem("cityname");
+    document.location.reload();
+
+}
+
+$("#search-btn").on("click",citySearch);
+$("#search-btn").on("click",fiveDay); 
+$(document).on("click",PastSearch);
+$(window).on("load",loadlastCity);
+$("#clear-history").on("click",clearHistory);
 
 
 
