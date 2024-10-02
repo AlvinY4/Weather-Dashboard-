@@ -16,7 +16,7 @@ SO THAT I can plan a trip accordingly
 
 ## Description 
 
-For this project I created a weather dashboard using the Open Weather API. It allows users to check the current weather of a desried city by entering the city name in the search bar. It also shows the five day forecast of the city on the bottom of the page. The website also saves your past searches in the localstorgae so you can go back to them. 
+I created a weather dashboard using the Open Weather API. It allows users to check the current weather of a desried city by entering the city name in the search bar. It also shows the five day forecast of the city on the bottom of the page. The website also saves your past searches in the localstorgae so you can go back to them. 
 
 ## Screenshot
 
